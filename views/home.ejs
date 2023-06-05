@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>
+            <%= locals.title%>
+        </title>
+        <script src="https://kit.fontawesome.com/37b15df45a.js" crossorigin="anonymous"></script>
+        <!-- our css should be below all other style so that we can override it -->
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1 id="page-heading">
+        <i class="fas fa-address-book"></i>   
+            Contacts List
+        </h1>
+        <div id="contacts-list-container">
+            <ul>
+                   
+                <% for (let i of contact_list) { %> 
+                    
+                    <li class="contact">
+                        <div class="details">
+                            <p><%= i.name %></p>
+                            <p><%= i.phone %></p>
+                        </div>
+                        <div class="delete-button">
+                            <a href="/delete-contact/?id=<%= i._id %>">
+                                <i class="fas fa-window-close"></i>
+                            </a>
+                        </div>
+                    </li>
+                    
+                <% } %>
+            </ul>
+        </div>
+
+        <form action="/create-contact" method="POST">
+            <input type="text" name="name" placeholder="Enter name" required>
+            <input type="number" name="phone" placeholder="Enter phone" required>
+            <button type="submit">Add contact</button>
+        </form>
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
+<!-- program flow
+
+   |  form filled   |  step 1
+   |      |         |   
+   |    submit      |  step 2
+   |      |         |  
+   |  action-route  |  step 3
+   |      |         |
+   |   redirect     |  step 4
+
+ -->
